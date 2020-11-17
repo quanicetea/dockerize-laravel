@@ -1,0 +1,21 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: dockerize_laravel_nginx
+    volumes:
+      - ./:/var/www
+      - ./nginx.conf/:/etc/nginx/conf.d/default.conf
+    ports:
+      ## run the nginx on port 8086 ##
+      - "8086:80"
+  app:
+    ## read php image from our custom docker image ##
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: dockerize_laravel_app
+    volumes:
+      ## copy project files to /var/www ##
+      - ./:/var/www
+    working_dir: /var/www
