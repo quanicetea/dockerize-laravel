@@ -11,7 +11,9 @@ services:
       - "8086:80"
   app:
     ## read php image from our custom docker image ##
-    image: quanicetea/dockerize-laravel
+    build:
+       context: .
+       dockerfile: ./Dockerfile
     container_name: dockerize_laravel_app
     volumes:
       ## copy project files to /var/www ##
